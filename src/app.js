@@ -8,14 +8,15 @@ import initializePassport from './config/passport.config.js';
 import mongoose from 'mongoose';
 import MongoStore from 'connect-mongo';
 //Routers
-import productsRouter from '../src/dao/fylesystem/routes/productsRoutes.js'
-import cartsRouter from '../src/dao/fylesystem/routes/cartRoutes.js';
 import productsRouterMongo from '../src/dao/mongodb/routes/products.route.js'
 import cartsRouterMongo from '../src/dao/mongodb/routes/carts.route.js'
-import viewsRouter from './routes/viewsRoutes.js';
+import cartViewsRouter from '../src/routes/cart.views.routes.js'
+import productsViewsRouter from '../src/routes/products.views.routes.js'
 import UserViewsRouter from './routes/user.views.routes.js'
 import sessionsRouter from './routes/session.routes.js'
-import githubLoginRouter from './routes/githublogin.routes.js'
+//import productsRouter from '../src/dao/fylesystem/routes/productsRoutes.js'
+//import cartsRouter from '../src/dao/fylesystem/routes/cartRoutes.js';
+//import githubLoginRouter from './routes/githublogin.routes.js'
 
 const app = express();
 //Express
@@ -47,17 +48,18 @@ app.use(session({
 //middlewares passport
 initializePassport()
 app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.session());
 
 //Routes
-app.use('/filesys', productsRouter);
-app.use('/filesys', cartsRouter);
+//app.use('/filesys', productsRouter);
+//app.use('/filesys', cartsRouter);
+//app.use("/github", githubLoginRouter);
 app.use('/mongodb/api/', productsRouterMongo);
 app.use('/mongodb/api/', cartsRouterMongo);
-app.use('/', viewsRouter);
+app.use('/', cartViewsRouter);
+app.use('/', productsViewsRouter);
 app.use("/users", UserViewsRouter);
 app.use("/api/sessions", sessionsRouter);
-app.use("/github", githubLoginRouter);
 
 
 //Server / MongoDB

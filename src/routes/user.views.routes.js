@@ -10,4 +10,9 @@ router.get("/register", (req, res) => {
     res.render("register");
 });
 
+router.get("/current", async(req, res) => {
+    const user = req.session.user
+    res.render("profile", {user : user})
+})
+
 export default router;

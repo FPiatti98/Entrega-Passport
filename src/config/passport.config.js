@@ -4,6 +4,13 @@ import GitHubStrategy from 'passport-github2';
 import { userModel } from '../dao/mongodb/models/user.model.js'
 import { createHash, isValidPassword } from '../util.js'
 
+export const checkAuth = (req, res, next) => {
+    if(req.isAuthenticated()){
+        return next()
+    }
+    res.redirect('/users/login')
+}
+
 const localStrategy = passportLocal.Strategy;
 
 const initializePassport = () => {

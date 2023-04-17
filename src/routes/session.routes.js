@@ -85,18 +85,18 @@ router.post("/register", passport.authenticate(
         res.status(201).send({status: "success", message: "Usuario creado con exito"});
     });
     
-    router.post("/login", passport.authenticate('login', {failureRedirect: '/api/sessions/fail-login'}), async(req, res) => {
-        console.log("User found to login");
-        const user = req.user;
-        console.log(user);
-        if(!user) return res.status(401).send({status: "error", error: "El usuario y la contraseña no coinciden "});
-        req.session.user = {
-            name : `${user.first_name} ${user.last_name}`,
-            email: user.email,
-            age: user.age
-        }
-        res.send({status: "success", payload: req.session.user, message: "Usuario logueado con exito"});
-    });
+router.post("/login", passport.authenticate('login', {failureRedirect: '/api/sessions/fail-login'}), async(req, res) => {
+    console.log("User found to login");
+    const user = req.user;
+    console.log(user);
+    if(!user) return res.status(401).send({status: "error", error: "El usuario y la contraseña no coinciden "});
+    req.session.user = {
+        name : `${user.first_name} ${user.last_name}`,
+        email: user.email,
+        age: user.age,
+    }
+    res.send({status: "success", payload: req.session.user, message: "Usuario logueado con exito"});
+});
     
 router.get("/fail-register", (req, res) => {
     res.status(401).send({error: "el register no se pudo procesar"});
