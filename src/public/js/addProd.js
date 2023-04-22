@@ -1,4 +1,4 @@
-const addProdToCart = (id) => {
+const addProdToCart = (id, cartId) => {
 
     /*
     fetch('/js/test.js')
@@ -13,7 +13,7 @@ const addProdToCart = (id) => {
   const funcion = await eval(data)
   */
 
-  fetch(`http://localhost:8080/mongodb/api/carts/641501090cd3fa0a61861a7c/product/${id}`, {
+  fetch(`http://localhost:8080/mongodb/api/carts/${cartId}/product/${id}`, {
     method: 'POST',
     mode: "cors",
   })

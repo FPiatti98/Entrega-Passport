@@ -1,8 +1,9 @@
 import passport from 'passport';
 import passportLocal from 'passport-local';
 import GitHubStrategy from 'passport-github2';
-import { userModel } from '../dao/mongodb/models/user.model.js'
+import { userModel } from '../db/mongodb/models/user.model.js'
 import { createHash, isValidPassword } from '../util.js'
+import { getNewCartId } from '../service/cart.service.js';
 
 export const checkAuth = (req, res, next) => {
     if(req.isAuthenticated()){
@@ -29,7 +30,8 @@ const initializePassport = () => {
                     last_name,
                     email,
                     age,
-                    password : createHash(password)
+                    password : createHash(password),
+                    cart : await getNewCartId()
                 };
                 const result = await userModel.create(user);
                 return done(null, result);

@@ -8,14 +8,14 @@ import initializePassport from './config/passport.config.js';
 import mongoose from 'mongoose';
 import MongoStore from 'connect-mongo';
 //Routers
-import productsRouterMongo from '../src/dao/mongodb/routes/products.route.js'
-import cartsRouterMongo from '../src/dao/mongodb/routes/carts.route.js'
-import cartViewsRouter from '../src/routes/cart.views.routes.js'
-import productsViewsRouter from '../src/routes/products.views.routes.js'
-import UserViewsRouter from './routes/user.views.routes.js'
+import productsRouterMongo from '../src/db/mongodb/routes/products.route.js'
+import cartsRouterMongo from '../src/db/mongodb/routes/carts.route.js'
+import cartViewsRouter from './routes/viewsRouters/cart.views.routes.js'
+import productsViewsRouter from './routes/viewsRouters/products.views.routes.js'
+import UserViewsRouter from './routes/viewsRouters/user.views.routes.js'
 import sessionsRouter from './routes/session.routes.js'
-//import productsRouter from '../src/dao/fylesystem/routes/productsRoutes.js'
-//import cartsRouter from '../src/dao/fylesystem/routes/cartRoutes.js';
+//import productsRouter from '../src/service/fylesystem/routes/productsRoutes.js'
+//import cartsRouter from '../src/service/fylesystem/routes/cartRoutes.js';
 //import githubLoginRouter from './routes/githublogin.routes.js'
 
 const app = express();

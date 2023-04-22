@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-// import { userModel } from "../dao/mongodb/models/user.model.js";
+// import { userModel } from "../db/mongodb/models/user.model.js";
 // import { createHash, isValidPassword } from "../util.js";
 
 const router = Router();
@@ -72,7 +72,8 @@ router.get("/githubcallback", passport.authenticate('github', {failureRedirect: 
     req.session.user= {
         name : `${user.first_name} ${user.last_name}`,
         email: user.email,
-        age: user.age
+        age: user.age,
+        cart : user.cart
     };
     req.session.admin = true;
     res.redirect("/github");
@@ -94,6 +95,7 @@ router.post("/login", passport.authenticate('login', {failureRedirect: '/api/ses
         name : `${user.first_name} ${user.last_name}`,
         email: user.email,
         age: user.age,
+        cart : user.cart
     }
     res.send({status: "success", payload: req.session.user, message: "Usuario logueado con exito"});
 });
