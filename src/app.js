@@ -1,3 +1,6 @@
+//env vars
+import config from './config/config.js';
+//dependencias
 import express from 'express';
 import handlebars from 'express-handlebars';
 import __dirname from './util.js';
@@ -7,7 +10,7 @@ import initializePassport from './config/passport.config.js';
 //server
 import mongoose from 'mongoose';
 import MongoStore from 'connect-mongo';
-//Routers
+//routers
 import productsRouterMongo from '../src/db/mongodb/routes/products.route.js'
 import cartsRouterMongo from '../src/db/mongodb/routes/carts.route.js'
 import cartViewsRouter from './routes/viewsRouters/cart.views.routes.js'
@@ -32,8 +35,7 @@ app.set('views', __dirname+'/views');
 app.set('view engine','handlebars');
 
 //Session
-const MONGO_URL = 'mongodb+srv://Fpiatti98:1diDusUmSWY0I7wI@cluster0.l1iwkg3.mongodb.net/ecommerce'
-
+const MONGO_URL = config.mongoUrl
 app.use(session({
     store: MongoStore.create({
         mongoUrl: MONGO_URL,
@@ -63,7 +65,7 @@ app.use("/api/sessions", sessionsRouter);
 
 
 //Server / MongoDB
-const SERVER_PORT = 8080
+const SERVER_PORT = config.port
 const httpServer = app.listen(SERVER_PORT, () => {console.log(`Escuchando desde el puerto ${SERVER_PORT}`);});
 
 const connectMongoDB = async () => {
